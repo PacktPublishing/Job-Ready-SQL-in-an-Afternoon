@@ -1,0 +1,76 @@
+\documentclass[USenglish,final,authoryear,12pt]{article}
+
+
+
+\usepackage{amsmath}
+\usepackage[a4paper]{geometry}
+ \geometry{
+ 	a4paper,
+ 	total={210mm,297mm},
+ 	left=20mm,
+ 	right=20mm,
+ 	top=20mm,
+ 	bottom=20mm,
+ }
+
+\usepackage{sectsty}
+\usepackage{cancel} %need to use this
+\usepackage{babel}
+%\allsectionsfont{\normalfont\sffamily\bfseries}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[scale=0.5]{Image1.png}
+%	\caption{Size of observable universe comparison between standard model of cosmology with inflation and without inflation [1].}
+%\end{figure}
+
+\begin{document}
+\textbf{\LARGE Exercise Sheet 2}\newline
+In this exercise sheet we're going to work on data filtering for easier analysis.\newline
+
+For these exercises we'll be using the userWithDate.db that you can find in the attachments.
+\section{Exercise 1}
+\begin{enumerate}
+	\item Find all the events that user 3 has performed
+	\item Find all the events that have an l in their name
+	\item Find all Login and Logout events
+\end{enumerate}
+
+\section{Exercise 2}
+
+\begin{enumerate}
+	\item Find all the photo events, and display them in order of most recent first
+	\item Filter these events for just the ones that happened in the most recent 30 seconds, relative to the time of the most recent event
+\end{enumerate}
+\pagebreak
+
+\section{Exercise 1 Sample Solutions}
+\begin{enumerate}
+	\item SELECT *\newline
+	FROM userData\newline
+	WHERE userId = 3;
+	\item SELECT *\newline
+	FROM userData\newline
+	WHERE eventName LIKE '\%l\%';
+	\item SELECT *\newline
+	FROM userData\newline
+	WHERE eventName IN ('Login','Logout');
+\end{enumerate}
+
+\section{Exercise 2 Sample Solutions}
+\begin{enumerate}
+	\item SELECT *\newline
+	FROM userData\newline
+	WHERE eventName = 'Photo'\newline
+	ORDER BY time DESC;
+	\item SELECT *\newline
+	FROM userData\newline
+	WHERE eventName = 'Photo' AND\newline
+	"time"$>=$ 1546297477.070375-30\newline
+	ORDER BY time DESC;
+\end{enumerate}
+\end{document}
+

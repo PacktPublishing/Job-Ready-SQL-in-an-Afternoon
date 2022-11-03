@@ -1,0 +1,81 @@
+\documentclass[USenglish,final,authoryear,12pt]{article}
+
+
+
+\usepackage{amsmath}
+\usepackage[a4paper]{geometry}
+ \geometry{
+ 	a4paper,
+ 	total={210mm,297mm},
+ 	left=20mm,
+ 	right=20mm,
+ 	top=20mm,
+ 	bottom=20mm,
+ }
+
+\usepackage{sectsty}
+\usepackage{cancel} %need to use this
+\usepackage{babel}
+%\allsectionsfont{\normalfont\sffamily\bfseries}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[scale=0.5]{Image1.png}
+%	\caption{Size of observable universe comparison between standard model of cosmology with inflation and without inflation [1].}
+%\end{figure}
+
+\begin{document}
+\textbf{\LARGE Exercise Sheet 3}\newline
+In this exercise sheet we're going to work on data preparation so that we have clean data to work with.\newline
+
+For these exercises we'll be using the Invoice table.
+\section{Exercise 1}
+
+\begin{enumerate}
+	\item Find the time difference each invoice and the start of 2009.
+\end{enumerate}
+
+\section{Exercise 2}
+
+\begin{enumerate}
+	\item Split up the InvoiceDate column into individual columns that contain the year, month, day, hour, minute, and second of each invoice.
+	\item Find all the events that happened within the first 5 days of each month.
+\end{enumerate}
+
+\pagebreak
+\section{Exercise 1 Sample Solutions}
+\begin{enumerate}
+	\item SELECT "InvoiceId",\newline
+	"InvoiceDate",\newline
+	"InvoiceDate"::TIMESTAMP - '2009-01-01 00:00:00'::TIMESTAMP AS td\newline
+	FROM "Invoice"\newline
+	LIMIT 5;
+\end{enumerate}
+
+\section{Exercise 2 Sample Solutions}
+\begin{enumerate}
+	\item SELECT "InvoiceId",\newline
+	"InvoiceDate",\newline
+	SUBSTR("InvoiceDate"::TEXT,1,4)::INT AS year,\newline
+	SUBSTR("InvoiceDate"::TEXT,6,2)::INT AS month,\newline
+	SUBSTR("InvoiceDate"::TEXT,9,2)::INT AS day,\newline
+	SUBSTR("InvoiceDate"::TEXT,12,2)::INT AS hour,\newline
+	SUBSTR("InvoiceDate"::TEXT,15,2)::INT AS minute,\newline
+	SUBSTR("InvoiceDate"::TEXT,18,2)::INT AS second\newline
+	FROM "Invoice";\newline
+	\item SELECT "InvoiceId",\newline
+	"InvoiceDate",\newline
+	SUBSTR("InvoiceDate"::TEXT,1,4)::INT AS year,\newline
+	SUBSTR("InvoiceDate"::TEXT,6,2)::INT AS month,\newline
+	SUBSTR("InvoiceDate"::TEXT,9,2)::INT AS day,\newline
+	SUBSTR("InvoiceDate"::TEXT,12,2)::INT AS hour,\newline
+	SUBSTR("InvoiceDate"::TEXT,15,2)::INT AS minute,\newline
+	SUBSTR("InvoiceDate"::TEXT,18,2)::INT AS second\newline
+	FROM "Invoice"\newline
+	WHERE SUBSTR("InvoiceDate"::TEXT,9,2)::INT <= 5;
+\end{enumerate}
+\end{document}
+

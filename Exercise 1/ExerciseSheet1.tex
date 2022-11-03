@@ -1,0 +1,69 @@
+\documentclass[USenglish,final,authoryear,12pt]{article}
+
+
+
+\usepackage{amsmath}
+\usepackage[a4paper]{geometry}
+ \geometry{
+ 	a4paper,
+ 	total={210mm,297mm},
+ 	left=20mm,
+ 	right=20mm,
+ 	top=20mm,
+ 	bottom=20mm,
+ }
+
+\usepackage{sectsty}
+\usepackage{cancel} %need to use this
+\usepackage{babel}
+%\allsectionsfont{\normalfont\sffamily\bfseries}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[scale=0.5]{Image1.png}
+%	\caption{Size of observable universe comparison between standard model of cosmology with inflation and without inflation [1].}
+%\end{figure}
+
+\begin{document}
+\textbf{\LARGE Exercise Sheet 1}\newline
+Solutions on the next page
+\section{}
+Perform the following tasks on the Training.db included in the attachments.
+\begin{enumerate}
+	\item Using the Data Source from Path option in DataGrip, read in the Training.db database. This database is an SQLite database so DataGrip may prompt you to download the necessary drivers.
+	\item Read the first 10 rows from each table in the database.
+	\item Read the bidtime, bid, and bidder column (in that order) from the ebayBids table.
+\end{enumerate}
+
+\section{}
+In this exercise we're going to practice understanding a new database, since we may not always be the creator of the database.
+\begin{enumerate}
+	\item Load the variable.db database into the DB browser. By using the schema understand what each value should look like and then insert 2 custom rows into the table.
+\end{enumerate}
+\pagebreak
+
+\section{1 Solutions}
+\begin{enumerate}
+	\item
+	\item \begin{enumerate}
+		\item SELECT * \newline
+		FROM ebayBids\newline
+		LIMIT 10;
+		\item SELECT * \newline
+		FROM ebayAuctions\newline
+		LIMIT 10;
+	\end{enumerate}
+	\item SELECT bidtime, bid, bidder \newline
+	FROM ebayBids\newline
+	LIMIT 10;
+\end{enumerate}
+
+\section{2 Solutions}
+\begin{enumerate}
+	\item INSERT INTO userData VALUES (3, 3, 2, 'Share', 1314543.01), (4, 2, 2, 'Share', 1382748.57);
+\end{enumerate}
+\end{document}
+
